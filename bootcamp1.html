@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootcamp 1: Interrogar con Criterio - SENA</title>
+    <style>
+        /* ====================================================
+           VARIABLES Y RESET
+           ==================================================== */
+        :root {
+            --sena-verde: #2E7D32;
+            --sena-verde-claro: #4CAF50;
+            --sena-azul: #1565C0;
+            --sena-gris: #263238;
+            --sena-naranja: #E65100;
+            --sena-dorado: #F9A825;
+            --sena-rojo: #C62828;
+            --bg-creativo: #FFF3E0;
+            --bg-analitico: #E3F2FD;
+            --bg-social: #FCE4EC;
+            --bg-practico: #E8F5E9;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+            --radius: 12px;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: var(--sena-gris);
+            line-height: 1.6;
+        }
+
+        /* ====================================================
+           CONTENEDOR PRINCIPAL
+           ==================================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: var(--radius);
+            padding: 40px 45px;
+            box-shadow: var(--shadow);
+        }
+
+        /* ====================================================
+           PESTAÑAS PRINCIPALES
+           ==================================================== */
+        .tabs-nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #777;
+            cursor: pointer;
+            border-bottom: 4px solid transparent;
+            transition: var(--transition);
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .tab-btn:hover {
+            background: #f1f8e9;
+            color: var(--sena-verde);
+        }
+
+        .tab-btn.active {
+            color: var(--sena-verde);
+            border-bottom-color: var(--sena-verde);
+            background: #f1f8e9;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ====================================================
+           SUB-PESTAÑAS
+           ==================================================== */
+        .subtabs-nav {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0 25px;
+            flex-wrap: wrap;
+        }
+
+        .subtab-btn {
+            background: #f1f3f5;
+            border: 2px solid #e0e0e0;
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #777;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .subtab-btn:hover {
+            background: #e8f5e9;
+            color: var(--sena-verde);
+            border-color: var(--sena-verde-claro);
+        }
+
+        .subtab-btn.active {
+            background: var(--sena-verde);
+            color: #fff;
+            border-color: var(--sena-verde);
+            box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+        }
+
+        .subtab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .subtab-content.active {
+            display: block;
+        }
+
+        /* ====================================================
+           HEADER
+           ==================================================== */
+        .header {
+            text-align: center;
+            border-bottom: 5px solid var(--sena-verde);
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: var(--sena-verde);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 4px 16px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            color: var(--sena-verde);
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .header .subtitulo {
+            color: #555;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        /* ====================================================
+           TÍTULOS
+           ==================================================== */
+        h2 {
+            color: var(--sena-verde);
+            font-size: 1.5rem;
+            margin: 35px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: var(--sena-azul);
+            font-size: 1.2rem;
+            margin: 25px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h4 {
+            color: var(--sena-gris);
+            font-size: 1.05rem;
+            margin: 18px 0 10px;
+        }
+
+        /* ====================================================
+           CAJAS DE PROMPT
+           ==================================================== */
+        .prompt-box {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin: 12px 0 18px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            border-left: 4px solid var(--sena-verde-claro);
+            white-space: pre-wrap;
+        }
+
+        .prompt-box .prompt-label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #81c784;
+            margin-bottom: 8px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+        }
+
+        /* ====================================================
+           BLOQUE DE CIERRE DE REFLEXIÓN
+           ==================================================== */
+        .cierre-reflexion {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f1f8e9 100%);
+            border: 2px solid var(--sena-azul);
+            border-radius: var(--radius);
+            padding: 25px 28px;
+            margin: 30px 0 10px;
+            position: relative;
+        }
+
+        .cierre-reflexion::before {
+            content: '🔗';
+            font-size: 1.8rem;
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            padding: 0 10px;
+            border-radius: 50%;
+        }
+
+        .cierre-reflexion h4 {
+            color: var(--sena-azul);
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            text-align: center;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-toggle-cierre {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto 15px auto;
+            background: var(--sena-azul);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+            font-family: inherit;
+        }
+
+        .btn-toggle-cierre:hover {
+            background: #0d47a1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(21, 101, 192, 0.4);
+        }
+
+        .cierre-contenido {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .cierre-contenido.visible {
+            max-height: 600px;
+            opacity: 1;
+            margin-top: 15px;
+        }
+
+        .cierre-contenido p {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 12px;
+        }
+
+        .cierre-contenido .frase-puente {
+            background: #fff;
+            border-left: 4px solid var(--sena-naranja);
+            border-radius: 0 8px 8px 0;
+            padding: 15px 18px;
+            margin-top: 15px;
+            font-style: italic;
+            color: var(--sena-gris);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .cierre-contenido .frase-puente strong {
+            color: var(--sena-naranja);
+        }
+
+        /* ====================================================
+           SECCIÓN 1: CÓMO PIENSA LA IA
+           ==================================================== */
+        .como-piensa {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 30px 32px;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--sena-naranja);
+            margin: 25px 0;
+        }
+
+        .como-piensa h3 {
+            color: var(--sena-naranja);
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .como-piensa p {
+            font-size: 0.98rem;
+            color: #444;
+            margin-bottom: 16px;
+        }
+
+        .analogia-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--sena-naranja);
+            border-radius: 0 8px 8px 0;
+            padding: 18px 20px;
+            margin: 20px 0;
+        }
+
+        .analogia-box h4 {
+            color: var(--sena-naranja);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .analogia-box p {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .ejemplo-arroz {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px 22px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .ejemplo-arroz h4 {
+            color: var(--sena-gris);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .instruccion-item {
+            background: #fff;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 5px solid #ccc;
+        }
+
+        .instruccion-item.mala { border-left-color: var(--sena-rojo); }
+        .instruccion-item.buena { border-left-color: var(--sena-verde); }
+        .instruccion-item.ambigua { border-left-color: var(--sena-dorado); }
+
+        .instruccion-item .etiqueta {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-bottom: 6px;
+        }
+
+        .instruccion-item.mala .etiqueta { background: #ffebee; color: #c62828; }
+        .instruccion-item.buena .etiqueta { background: #e8f5e9; color: var(--sena-verde); }
+        .instruccion-item.ambigua .etiqueta { background: #fffde7; color: #f57f17; }
+
+        .instruccion-item p {
+            font-size: 0.92rem;
+            color: #444;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .pregunta-reflexiva {
+            background: #e3f2fd;
+            border-left: 4px solid var(--sena-azul);
+            border-radius: 0 8px 8px 0;
+            padding: 15px 18px;
+            margin: 20px 0;
+            font-weight: 500;
+            color: var(--sena-azul);
+        }
+
+        .conclusion-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--sena-verde);
+            border-radius: 0 8px 8px 0;
+            padding: 18px 20px;
+            margin: 20px 0;
+        }
+
+        .conclusion-box p {
+            font-size: 0.98rem;
+            color: #444;
+            margin: 0;
+        }
+
+        .producto-box {
+            background: #f1f8e9;
+            border: 2px dashed var(--sena-verde);
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .producto-box p {
+            font-size: 0.9rem;
+            color: var(--sena-verde);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* ====================================================
+           TOGGLES DE CONTEXTO
+           ==================================================== */
+        .como-preguntar { margin: 25px 0; }
+
+        .como-preguntar > p {
+            font-size: 0.98rem;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .toggles-contexto {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin: 20px 0;
+        }
+
+        .toggle-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .toggle-item:hover { box-shadow: var(--shadow-hover); }
+
+        .toggle-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 20px 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            color: #fff;
+            letter-spacing: 0.3px;
+            font-family: inherit;
+        }
+
+        .toggle-btn:hover { filter: brightness(1.1); }
+
+        .toggle-btn .toggle-icono { font-size: 1.4rem; flex-shrink: 0; }
+
+        .toggle-btn .toggle-texto {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .toggle-btn .toggle-titulo { font-size: 1.1rem; font-weight: 700; }
+
+        .toggle-btn .toggle-subtitulo {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .toggle-btn .toggle-flecha {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .toggle-btn.abierto .toggle-flecha { transform: rotate(180deg); }
+
+        .toggle-item.prompt .toggle-btn { background: linear-gradient(135deg, #1565C0, #0d47a1); }
+        .toggle-item.content .toggle-btn { background: linear-gradient(135deg, #E65100, #bf360c); }
+        .toggle-item.agente .toggle-btn { background: linear-gradient(135deg, #2E7D32, #1b5e20); }
+
+        .toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, opacity 0.4s ease, padding 0.4s ease;
+            opacity: 0;
+            background: #fff;
+            padding: 0 25px;
+        }
+
+        .toggle-content.visible {
+            max-height: 3000px;
+            opacity: 1;
+            padding: 25px;
+        }
+
+        .toggle-content h4 { margin-top: 0; margin-bottom: 12px; font-size: 1.1rem; }
+
+        .toggle-content p { font-size: 0.95rem; color: #444; margin-bottom: 14px; }
+
+        .definicion-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 15px 0 20px;
+            border-left: 5px solid #ccc;
+        }
+
+        .toggle-item.prompt .definicion-box { border-left-color: var(--sena-azul); background: #e3f2fd; }
+        .toggle-item.content .definicion-box { border-left-color: var(--sena-naranja); background: #fff3e0; }
+        .toggle-item.agente .definicion-box { border-left-color: var(--sena-verde); background: #e8f5e9; }
+
+        .definicion-box p { margin: 0; font-size: 0.95rem; color: #444; }
+
+        .ejemplo-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px 22px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .ejemplo-box h5 {
+            font-size: 0.95rem;
+            color: var(--sena-gris);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dialogo {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin: 12px 0;
+            overflow-x: auto;
+        }
+
+        .dialogo .tu { color: #81c784; font-weight: 700; }
+        .dialogo .ia { color: #64b5f6; font-weight: 700; }
+        .dialogo .resultado { color: #ffb74d; font-weight: 700; }
+
+        .flujo-box {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            border-radius: 8px;
+            padding: 20px 18px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .flujo-malo { border-left: 4px solid var(--sena-rojo); }
+        .flujo-bueno { border-left: 4px solid var(--sena-verde); }
+
+        .flujo-box .flujo-titulo {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ====================================================
+           APROPIACIÓN: BARRA DE LLMs
+           ==================================================== */
+        .llm-bar {
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            margin: 25px 0;
+            border: 1px solid #e9ecef;
+        }
+
+        .llm-bar h3 {
+            color: var(--sena-gris);
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .llm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+        }
+
+        .llm-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            transition: var(--transition);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        .llm-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            filter: brightness(1.1);
+        }
+
+        .llm-btn.gemini { background: linear-gradient(135deg, #4285F4, #1a73e8); }
+        .llm-btn.chatgpt { background: linear-gradient(135deg, #10a37f, #0d8a6a); }
+        .llm-btn.claude { background: linear-gradient(135deg, #d97706, #b45309); }
+        .llm-btn.perplexity { background: linear-gradient(135deg, #20808D, #17616b); }
+        .llm-btn.grok { background: linear-gradient(135deg, #1a1a1a, #333333); }
+        .llm-btn.deepseek { background: linear-gradient(135deg, #1565C0, #0d47a1); }
+        .llm-btn.kimi { background: linear-gradient(135deg, #7C3AED, #5b21b6); }
+        .llm-btn.glm { background: linear-gradient(135deg, #b45309, #78350f); }
+
+        /* ====================================================
+           APROPIACIÓN: ACORDEONES
+           ==================================================== */
+        .acordeon-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 18px;
+            transition: var(--transition);
+        }
+
+        .acordeon-item:hover { box-shadow: var(--shadow-hover); }
+
+        .acordeon-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 20px 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            color: #fff;
+            background: linear-gradient(135deg, #2E7D32, #1b5e20);
+            font-family: inherit;
+        }
+
+        .acordeon-btn:hover { filter: brightness(1.1); }
+
+        .acordeon-btn .acordeon-num { font-size: 1.3rem; font-weight: 800; flex-shrink: 0; }
+        .acordeon-btn .acordeon-titulo { flex-grow: 1; }
+
+        .acordeon-btn .acordeon-flecha {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .acordeon-btn.abierto .acordeon-flecha { transform: rotate(180deg); }
+
+        .acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, opacity 0.4s ease, padding 0.4s ease;
+            opacity: 0;
+            background: #fff;
+            padding: 0 25px;
+        }
+
+        .acordeon-content.visible {
+            max-height: 3000px;
+            opacity: 1;
+            padding: 25px;
+        }
+
+        .acordeon-content h4 { margin-top: 0; color: var(--sena-gris); }
+        .acordeon-content p { font-size: 0.95rem; color: #444; margin-bottom: 14px; }
+
+        /* ====================================================
+           FORMULARIOS Y TEXTBOXES
+           ==================================================== */
+        .form-group { margin-bottom: 18px; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--sena-gris);
+            margin-bottom: 8px;
+        }
+
+        .form-group label .ejemplo {
+            font-weight: 400;
+            color: #888;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            transition: var(--transition);
+            color: var(--sena-gris);
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--sena-verde);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ====================================================
+           BOTONES DE ACCIÓN
+           ==================================================== */
+        .btn-accion {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .btn-accion.copiar { background: var(--sena-azul); color: #fff; }
+
+        .btn-accion.copiar:hover {
+            background: #0d47a1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+        }
+
+        .btn-accion.copiar.copiado { background: var(--sena-verde); }
+
+        .btn-accion.limpiar {
+            background: #f1f3f5;
+            color: #666;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-accion.limpiar:hover { background: #e9ecef; color: #444; }
+
+        .btn-accion.descargar { background: var(--sena-naranja); color: #fff; }
+
+        .btn-accion.descargar:hover {
+            background: #bf360c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3);
+        }
+
+        /* ====================================================
+           RESPUESTA A LAS PREGUNTAS
+           ==================================================== */
+        .respuesta-faro {
+            background: #fffde7;
+            border: 2px dashed var(--sena-dorado);
+            border-radius: var(--radius);
+            padding: 25px 28px;
+            margin: 25px 0;
+        }
+
+        .respuesta-faro h4 {
+            color: #e65100;
+            margin-top: 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .respuesta-faro > p {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        .acordeon-pregunta {
+            background: #fff;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .acordeon-pregunta .pregunta-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 18px 22px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            color: var(--sena-gris);
+            background: #f8f9fa;
+            font-family: inherit;
+        }
+
+        .acordeon-pregunta .pregunta-btn:hover { background: #e8f5e9; }
+
+        .acordeon-pregunta .pregunta-btn.abierto {
+            background: #e8f5e9;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .acordeon-pregunta .pregunta-btn .pregunta-icono {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .acordeon-pregunta .pregunta-btn .pregunta-texto {
+            flex-grow: 1;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .acordeon-pregunta .pregunta-btn .pregunta-flecha {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .acordeon-pregunta .pregunta-btn.abierto .pregunta-flecha {
+            transform: rotate(180deg);
+        }
+
+        .acordeon-pregunta .pregunta-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.4s ease;
+            opacity: 0;
+            padding: 0 22px;
+        }
+
+        .acordeon-pregunta .pregunta-content.visible {
+            max-height: 600px;
+            opacity: 1;
+            padding: 22px;
+        }
+
+        .acordeon-pregunta .pregunta-content textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            resize: vertical;
+            transition: var(--transition);
+            color: var(--sena-gris);
+        }
+
+        .acordeon-pregunta .pregunta-content textarea:focus {
+            outline: none;
+            border-color: var(--sena-dorado);
+            box-shadow: 0 0 0 3px rgba(249, 168, 37, 0.1);
+        }
+
+        /* ====================================================
+           RESPONSIVE
+           ==================================================== */
+        @media (max-width: 768px) {
+            body { padding: 15px 10px; }
+            .container { padding: 20px 18px; }
+            .header h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            h3 { font-size: 1.05rem; }
+            .tabs-nav { flex-direction: column; gap: 5px; }
+            .tab-btn { justify-content: center; }
+            .subtabs-nav { flex-direction: column; gap: 8px; }
+            .subtab-btn { justify-content: center; }
+            .cierre-reflexion { padding: 20px 18px; }
+            .btn-toggle-cierre { width: 100%; }
+            .toggle-btn { padding: 16px 18px; font-size: 1rem; }
+            .toggle-content.visible { padding: 18px; }
+            .como-piensa { padding: 22px 18px; }
+            .llm-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+            .acordeon-btn { padding: 16px 18px; font-size: 0.92rem; }
+            .acordeon-content.visible { padding: 18px; }
+            .respuesta-faro { padding: 20px 18px; }
+            .acordeon-pregunta .pregunta-btn { padding: 15px 16px; font-size: 0.88rem; }
+            .acordeon-pregunta .pregunta-content.visible { padding: 16px; }
+        }
+
+        /* ====================================================
+           IMPRESIÓN
+           ==================================================== */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 20px; }
+            .header { border-bottom-color: #000; }
+            h2 { border-bottom-color: #000; }
+            .tabs-nav, .subtabs-nav { display: none; }
+            .tab-content, .subtab-content { display: block !important; }
+            .btn-toggle-cierre { display: none; }
+            .cierre-contenido { max-height: none !important; opacity: 1 !important; margin-top: 15px !important; }
+            .toggle-btn, .acordeon-btn { background: #333 !important; color: #fff !important; }
+            .toggle-content, .acordeon-content { max-height: none !important; opacity: 1 !important; padding: 25px !important; }
+            .toggle-flecha, .acordeon-flecha { display: none; }
+            .llm-bar { display: none; }
+            .acordeon-pregunta .pregunta-content { max-height: none !important; opacity: 1 !important; padding: 22px !important; }
+            .acordeon-pregunta .pregunta-flecha { display: none; }
+            .acordeon-pregunta .pregunta-btn { background: #f0f0f0 !important; }
+        }
+
+        /* ====================================================
+           FOOTER
+           ==================================================== */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .footer strong { color: var(--sena-verde); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <div class="header">
+        <div class="badge">Bootcamp 1 · Nivel Explorador</div>
+        <h1>INTERROGAR CON CRITERIO</h1>
+        <p class="subtitulo">"Del preguntar ingenuo al preguntar estratégico"</p>
+    </div>
+
+    <!-- ============================================
+         PESTAÑAS PRINCIPALES
+         ============================================ -->
+    <div class="tabs-nav">
+        <button class="tab-btn active" onclick="openTab(event, 'reflexion')">🔍 Reflexión Inicial</button>
+        <button class="tab-btn" onclick="openTab(event, 'contextualizacion')">🌍 Contextualización</button>
+        <button class="tab-btn" onclick="openTab(event, 'apropiacion')">🛠️ Apropiación</button>
+        <button class="tab-btn" onclick="openTab(event, 'transferencia')">🧠 Transferencia y Cierre</button>
+    </div>
+
+    <!-- ============================================
+         PESTAÑA 1: REFLEXIÓN INICIAL
+         ============================================ -->
+    <div id="reflexion" class="tab-content active">
+        <h2>🔍 Reflexión Inicial: "Las preguntas activadoras"</h2>
+        <p><strong>Objetivo:</strong> Cuestionar la importancia de hacer buenas preguntas.</p>
+        <p><strong>Duración:</strong> 10 minutos</p>
+
+        <div class="preguntas-activadoras" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 25px 0;">
+            <div class="pregunta-card" style="background: #fff; border-radius: var(--radius); padding: 25px 22px; box-shadow: var(--shadow); border-top: 5px solid var(--sena-azul); transition: var(--transition);">
+                <span style="display: inline-block; background: var(--sena-azul); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 3px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Pregunta 1</span>
+                <p style="font-size: 1rem; font-weight: 600; color: var(--sena-gris); font-style: italic; line-height: 1.5; margin-bottom: 10px;">"¿Qué hace que una pregunta a la IA sea 'poderosa' y capaz de generar una respuesta que realmente transforme mi práctica docente?"</p>
+                <span style="font-size: 0.8rem; color: #777; display: block; border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">Enfócate en la calidad del prompt y su impacto en la enseñanza.</span>
+            </div>
+            <div class="pregunta-card" style="background: #fff; border-radius: var(--radius); padding: 25px 22px; box-shadow: var(--shadow); border-top: 5px solid var(--sena-naranja); transition: var(--transition);">
+                <span style="display: inline-block; background: var(--sena-naranja); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 3px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Pregunta 2</span>
+                <p style="font-size: 1rem; font-weight: 600; color: var(--sena-gris); font-style: italic; line-height: 1.5; margin-bottom: 10px;">"¿Puede una IA 'entender' realmente el mundo como lo hacemos los humanos, o solo procesa patrones? ¿Qué implicaciones tiene esto para mi rol como instructor?"</p>
+                <span style="font-size: 0.8rem; color: #777; display: block; border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">Reflexiona sobre los límites de la IA y tu rol como mediador.</span>
+            </div>
+            <div class="pregunta-card" style="background: #fff; border-radius: var(--radius); padding: 25px 22px; box-shadow: var(--shadow); border-top: 5px solid var(--sena-verde); transition: var(--transition);">
+                <span style="display: inline-block; background: var(--sena-verde); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 3px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Pregunta 3</span>
+                <p style="font-size: 1rem; font-weight: 600; color: var(--sena-gris); font-style: italic; line-height: 1.5; margin-bottom: 10px;">"¿Cómo puedo pasar de ser un 'usuario pasivo' de la IA a un 'arquitecto crítico' de experiencias de aprendizaje mediadas por IA?"</p>
+                <span style="font-size: 0.8rem; color: #777; display: block; border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">Visualiza tu transformación como diseñador de experiencias.</span>
+            </div>
+        </div>
+
+        <div class="cierre-reflexion">
+            <h4>🔗 Cierre de la Reflexión Inicial: Puente hacia la Contextualización</h4>
+            <button class="btn-toggle-cierre" id="btnToggleCierre" onclick="toggleCierre()">
+                🔗 Ver cierre de la Reflexión Inicial
+            </button>
+            <div class="cierre-contenido" id="cierreContenido">
+                <p>Las tres preguntas que acabas de leer no son independientes: <strong>todas apuntan a un mismo núcleo</strong>. Para saber si una pregunta a la IA es "poderosa", para entender si realmente "comprende" el mundo o solo procesa patrones, y para dejar de ser un usuario pasivo y convertirte en un arquitecto crítico, <strong>necesitas primero comprender cómo funciona la IA por dentro</strong>.</p>
+                <p>No podemos interrogar con criterio aquello que no entendemos. Por eso, antes de lanzarnos a experimentar con LLMs y multimodalidad, vamos a desmontar la máquina y ver cómo "piensa".</p>
+                <div class="frase-puente">
+                    <strong>🔜 Siguiente parada:</strong> En la pestaña de <strong>Contextualización</strong> descubrirás, a través de una analogía y un ejemplo cotidiano, qué es el aprendizaje por refuerzo y por qué la calidad de tu pregunta determina la calidad de la respuesta. <strong>Ese es el primer paso para responder las 3 preguntas.</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         PESTAÑA 2: CONTEXTUALIZACIÓN
+         ============================================ -->
+    <div id="contextualizacion" class="tab-content">
+        <h2>🌍 Contextualización: "¿Cómo piensa la IA?"</h2>
+        <p><strong>Objetivo:</strong> Entender las 3 disciplinas que responden a las 3 preguntas activadoras.</p>
+        <p><strong>Duración:</strong> 15 minutos</p>
+
+        <div class="subtabs-nav">
+            <button class="subtab-btn active" onclick="openSubTab(event, 'comoPiensa')">🧠 Cómo piensa la IA</button>
+            <button class="subtab-btn" onclick="openSubTab(event, 'comoPreguntar')">❓ Cómo hacer buenas preguntas</button>
+        </div>
+
+        <!-- SUB-PESTAÑA 1: CÓMO PIENSA LA IA -->
+        <div id="comoPiensa" class="subtab-content active">
+            <div class="como-piensa">
+                <h3>🧠 Comprensión del aprendizaje por refuerzo y de la importancia de un buen prompt</h3>
+
+                <p>Para interrogar con criterio a la IA, primero necesitas entender <strong>cómo "piensa"</strong>. Y la verdad es que no piensa como un humano: no razona, no reflexiona, no tiene intenciones. Lo que hace es <strong>reconocer patrones</strong> a partir de millones de ejemplos con los que fue entrenada. A esto se le llama <strong>aprendizaje por refuerzo</strong>.</p>
+
+                <div class="analogia-box">
+                    <h4>🔹 Analogía: Enseñarle a un niño a reconocer animales</h4>
+                    <p>Imagina que quieres enseñarle a un niño a distinguir entre perros y gatos. Le muestras miles de fotos: "esto es un perro", "esto es un gato". Al principio se equivoca, pero cada vez que acierta le dices "¡muy bien!" y cada vez que falla le dices "no, inténtalo de nuevo". Después de miles de intentos, el niño aprende a distinguirlos casi sin pensarlo.</p>
+                    <p>Así funciona la IA: <strong>aprende de patrones de imágenes, textos y datos</strong>. No "piensa", "reconoce patrones". No entiende el significado profundo de las cosas; simplemente ha visto tantos ejemplos que puede predecir cuál es la respuesta más probable.</p>
+                </div>
+
+                <p>Ahora que sabes esto, veamos por qué la <strong>calidad de tu instrucción</strong> (tu prompt) determina la calidad de la respuesta. Para eso, usemos un ejemplo cotidiano: <strong>hacer arroz</strong>.</p>
+
+                <div class="ejemplo-arroz">
+                    <h4>🍚 Ejemplo de contraste: "Hacer arroz"</h4>
+
+                    <div class="instruccion-item mala">
+                        <span class="etiqueta">Instrucción A · Mala</span>
+                        <p>"Haz arroz."</p>
+                    </div>
+
+                    <div class="instruccion-item buena">
+                        <span class="etiqueta">Instrucción B · Buena</span>
+                        <p>"Para hacer arroz: una taza de arroz, dos tazas de agua, una pizca de sal. Cocina a fuego medio por 20 minutos."</p>
+                    </div>
+
+                    <div class="instruccion-item ambigua">
+                        <span class="etiqueta">Instrucción C · Ambigua</span>
+                        <p>"Para hacer arroz: dos tazas de agua, una de arroz, y azúcar."</p>
+                    </div>
+                </div>
+
+                <div class="pregunta-reflexiva">
+                    <strong>🤔 Pregunta para reflexionar:</strong> Si el agente (la IA) solo ejecuta lo que le pides, ¿qué pasa con la Instrucción A? ¿Qué pasa con la Instrucción C? ¿Y qué pasa con la Instrucción B? ¿Cuál crees que produce el mejor arroz?
+                </div>
+
+                <div class="conclusion-box">
+                    <p><strong>💡 Conclusión:</strong> La IA es como un agente que solo ejecuta lo que le pides. Si no das instrucciones claras, contexto y restricciones, el resultado será impredecible. Un buen algoritmo (buen prompt) es la diferencia entre un arroz crudo y un arroz perfecto. <strong>La calidad de la respuesta depende de la calidad de la pregunta.</strong></p>
+                </div>
+
+                <div class="producto-box">
+                    <p>📦 Producto del Momento 1.2: Comprensión del aprendizaje por refuerzo y de la importancia de un buen prompt.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUB-PESTAÑA 2: CÓMO HACER BUENAS PREGUNTAS -->
+        <div id="comoPreguntar" class="subtab-content">
+            <div class="como-preguntar">
+                <p>Las 3 preguntas de la Reflexión Inicial no se responden con una sola idea. Cada una pertenece a una <strong>disciplina distinta</strong> de la relación con la IA. A continuación, explora las 3 capas haciendo clic en cada botón.</p>
+                <p>La progresión es: <strong>🔵 Prompt Engineering → 🟠 Content Engineering → 🟢 Modo Agéntico</strong>. De "preguntar bien" a "estructurar el conocimiento" y finalmente a "diseñar sistemas que actúan con autonomía".</p>
+
+                <div class="toggles-contexto">
+
+                    <!-- TOGGLE 1: PROMPT ENGINEERING -->
+                    <div class="toggle-item prompt">
+                        <button class="toggle-btn" onclick="toggleContexto(this, 'promptContent')">
+                            <span class="toggle-icono">🔵</span>
+                            <span class="toggle-texto">
+                                <span class="toggle-titulo">PROMPT ENGINEERING</span>
+                                <span class="toggle-subtitulo">"Le pido que actúe como experto y le pregunto por la receta"</span>
+                            </span>
+                            <span class="toggle-flecha">▼</span>
+                        </button>
+
+                        <div class="toggle-content" id="promptContent">
+                            <h4>🔵 Prompt Engineering: El arte de preguntar con precisión</h4>
+
+                            <div class="definicion-box">
+                                <p><strong>Definición:</strong> Es la disciplina de diseñar instrucciones (prompts) que maximicen la calidad, precisión y utilidad de las respuestas de la IA. Incluye asignar un rol, dar contexto, formular una tarea clara y establecer restricciones.</p>
+                            </div>
+
+                            <p><strong>Responde a la Pregunta 1:</strong> "¿Qué hace que una pregunta a la IA sea 'poderosa'...?"</p>
+
+                            <div class="ejemplo-box">
+                                <h5>🍚 Ejemplo: "Le pido que actúe como experto y le pregunto por la receta"</h5>
+
+                                <div class="dialogo">
+<span class="tu">TÚ:</span> "Actúa como un chef experto en cocina asiática. 
+     ¿Cuál es la receta perfecta para hacer arroz suelto 
+     para 4 personas?"
+
+<span class="ia">IA:</span> "Para un arroz suelto y perfecto para 4 personas, 
+     necesitas: 2 tazas de arroz, 4 tazas de agua, 
+     1 cucharadita de sal. Cocina a fuego medio por 20 minutos..."
+
+<span class="resultado">RESULTADO:</span> Receta estándar, confiable, pero genérica.
+                                </div>
+
+                                <p><strong>Lo que haces:</strong> Asignas un <strong>rol</strong> ("chef experto") y formulas una <strong>pregunta específica</strong> ("receta perfecta para arroz suelto para 4 personas"). Le pides a la IA que <strong>actúe como</strong> alguien que sabe.</p>
+                                <p><strong>Lo que obtienes:</strong> Una respuesta que depende de la calidad del rol asignado y de la precisión de tu pregunta.</p>
+                                <p><strong>El límite:</strong> La receta es genérica. No tiene en cuenta <em>tus</em> ingredientes, <em>tu</em> olla, <em>tus</em> preferencias. La IA responde desde su conocimiento general, no desde tu contexto.</p>
+                            </div>
+
+                            <div class="producto-box">
+                                <p>📦 Producto: Tabla comparativa de prompts (débil vs. poderoso)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOGGLE 2: CONTENT ENGINEERING -->
+                    <div class="toggle-item content">
+                        <button class="toggle-btn" onclick="toggleContexto(this, 'contentContent')">
+                            <span class="toggle-icono">🟠</span>
+                            <span class="toggle-texto">
+                                <span class="toggle-titulo">CONTENT ENGINEERING</span>
+                                <span class="toggle-subtitulo">"Le pido que me pregunte para tener una mejor experiencia"</span>
+                            </span>
+                            <span class="toggle-flecha">▼</span>
+                        </button>
+
+                        <div class="toggle-content" id="contentContent">
+                            <h4>🟠 Content Engineering: El arte de estructurar el ecosistema de información</h4>
+
+                            <div class="definicion-box">
+                                <p><strong>Definición:</strong> Es la disciplina de organizar, estructurar y proveer el contenido que alimenta a la IA para que sus respuestas sean contextualizadas, verificables y útiles. Incluye entradas (datos, contexto, restricciones) y un proceso de estructuración.</p>
+                            </div>
+
+                            <p><strong>Responde a la Pregunta 2:</strong> "¿Puede una IA 'entender' realmente el mundo como lo hacemos los humanos...?"</p>
+
+                            <div class="ejemplo-box">
+                                <h5>🍚 Ejemplo: "Le pido que me pregunte para tener una mejor experiencia"</h5>
+
+                                <div class="dialogo">
+<span class="tu">TÚ:</span> "Quiero hacer arroz, pero no sé qué tengo en la cocina.
+     ¿Puedes preguntarme lo que necesites para darme 
+     la mejor receta posible?"
+
+<span class="ia">IA:</span> "Claro. ¿Qué ingredientes tienes disponibles?
+     ¿Cuántas personas van a comer?
+     ¿Prefieres arroz blanco, integral o con verduras?
+     ¿Tienes olla a presión o convencional?
+     ¿Hay alguna restricción alimentaria?"
+
+<span class="tu">TÚ:</span> [Respondes]
+
+<span class="ia">IA:</span> [Genera una receta personalizada con lo que tienes, 
+     para el número de personas, con el método disponible]
+
+<span class="resultado">RESULTADO:</span> Arroz adaptado a TU contexto real.
+                                </div>
+
+                                <p><strong>Lo que haces:</strong> No solo das una instrucción, sino que <strong>estructuras el ecosistema de información</strong> para que la IA te entienda mejor. Inviertes la relación: en lugar de solo preguntar, <strong>permites que la IA te pregunte</strong>.</p>
+                                <p><strong>Lo que obtienes:</strong> Una respuesta <strong>contextualizada, verificable y útil</strong> para tu situación específica.</p>
+                                <p><strong>El avance:</strong> Pasas de ser un "consultante" a un "diseñador de conversaciones".</p>
+                            </div>
+
+                            <div class="producto-box">
+                                <p>📦 Producto: Mapa de contenido con entradas, proceso y salidas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOGGLE 3: MODO AGÉNTICO -->
+                    <div class="toggle-item agente">
+                        <button class="toggle-btn" onclick="toggleContexto(this, 'agenteContent')">
+                            <span class="toggle-icono">🟢</span>
+                            <span class="toggle-texto">
+                                <span class="toggle-titulo">MODO AGÉNTICO</span>
+                                <span class="toggle-subtitulo">"Automatizo (bien/mal)"</span>
+                            </span>
+                            <span class="toggle-flecha">▼</span>
+                        </button>
+
+                        <div class="toggle-content" id="agenteContent">
+                            <h4>🟢 Modo Agéntico: El arte de orquestar flujos de acción con autonomía</h4>
+
+                            <div class="definicion-box">
+                                <p><strong>Definición:</strong> Es cuando la IA deja de ser un simple "respondedor" y se convierte en un agente que ejecuta un flujo de acciones para lograr un objetivo, con validación y corrección. Puede estar bien o mal diseñado.</p>
+                            </div>
+
+                            <p><strong>Responde a la Pregunta 3:</strong> "¿Cómo puedo pasar de ser un 'usuario pasivo' a un 'arquitecto crítico'...?"</p>
+
+                            <div class="ejemplo-box">
+                                <h5>🍚 Ejemplo: "Automatizo (bien/mal)"</h5>
+
+                                <p><strong>❌ Flujo Mal Diseñado (Automatización sin criterio)</strong></p>
+                                <div class="flujo-box flujo-malo">
+<span class="flujo-titulo">🔴 FLUJO MALO: "Hacer arroz" sin criterio</span>
+INICIO
+  │
+  ▼
+┌─────────────────────┐
+│ 2 tazas de arroz    │
+└─────────────────────┘
+  │
+  ▼
+┌─────────────────────┐
+│ 1 taza de agua      │
+└─────────────────────┘
+  │
+  ▼
+┌─────────────────────┐
+│ 1 pizca de azúcar   │
+└─────────────────────┘
+  │
+  ▼
+┌─────────────────────┐
+│ Cocinar 60 min      │
+└─────────────────────┘
+  │
+  ▼
+┌─────────────────────┐
+│ Servir              │
+└─────────────────────┘
+  │
+  ▼
+RESULTADO: Arroz crudo, pegado, dulce
+
+❌ Sin validación
+❌ Proporción incorrecta (2:1 en vez de 1:2)
+❌ Ingrediente equivocado (azúcar en vez de sal)
+❌ Tiempo excesivo (60 min en vez de 20 min)
+                                </div>
+
+                                <p><strong>✅ Flujo Bien Diseñado (Automatización con criterio)</strong></p>
+                                <div class="flujo-box flujo-bueno">
+<span class="flujo-titulo">🟢 FLUJO BUENO: "Hacer arroz" con criterio</span>
+INICIO
+  │
+  ▼
+┌─────────────────────┐
+│ 1 taza de arroz     │
+└─────────────────────┘
+  │
+  ▼
+┌─────────────────────┐
+│ 2 tazas de agua     │
+└─────────────────────┘
+  │
+  ▼
+┌─────────────────────┐
+│ 1 pizca de sal      │
+└─────────────────────┘
+  │
+  ▼
+┌─────────────────────┐
+│ Cocinar 20 min      │
+└─────────────────────┘
+  │
+  ▼
+┌─────────────────────┐
+│ ¿Está suelto?       │ ◄── VALIDACIÓN
+└─────────────────────┘
+  │
+  ├── SÍ ──► ┌─────────────────────┐
+  │          │ Servir              │
+  │          └─────────────────────┘
+  │
+  └── NO ──► ┌─────────────────────┐
+             │ Agregar agua        │
+             │ Cocinar 5 min más   │
+             └─────────────────────┘
+                  │
+                  └──► (volver a validar)
+  │
+  ▼
+RESULTADO: Arroz suelto, salado, en su punto
+
+✅ Validación en el paso 5
+✅ Proporción correcta (1:2)
+✅ Ingrediente correcto (sal)
+✅ Tiempo adecuado (20 min)
+✅ Bucle de corrección si no cumple
+                                </div>
+
+                                <p><strong>Lo que haces:</strong> Diseñas un <strong>flujo completo de acciones</strong> que la IA ejecuta de forma autónoma, pero con <strong>puntos de control</strong> donde se verifica si el resultado es el esperado. Si no lo es, se corrige y se vuelve a intentar.</p>
+                                <p><strong>Lo que obtienes:</strong> Un sistema que <strong>no solo responde, sino que actúa</strong> con criterio y se auto-corrige.</p>
+                                <p><strong>El salto:</strong> Pasas de "usuario" a "arquitecto de sistemas agénticos".</p>
+                            </div>
+
+                            <div class="producto-box">
+                                <p>📦 Producto: Diagrama de flujo agéntico para una tarea docente</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         PESTAÑA 3: APROPIACIÓN
+         ============================================ -->
+    <div id="apropiacion" class="tab-content">
+        <h2>🛠️ Actividades de Apropiación</h2>
+        <p><em>"Comparando LLMs y explorando multimodalidad"</em></p>
+        <p><strong>Objetivo:</strong> Aplicar lo aprendido en la pestaña de Contextualización mediante la comparación de LLMs y el análisis de 4 insumos multimodales.</p>
+        <p><strong>Duración:</strong> 60 minutos</p>
+
+        <!-- BARRA DE LLMs -->
+        <div class="llm-bar">
+            <h3>🚀 Lanzar LLMs (abre en pestaña nueva)</h3>
+            <div class="llm-grid">
+                <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" class="llm-btn gemini">🔵 Gemini</a>
+                <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="llm-btn chatgpt">🟢 ChatGPT</a>
+                <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" class="llm-btn claude">🟠 Claude</a>
+                <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer" class="llm-btn perplexity">🟣 Perplexity</a>
+                <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" class="llm-btn grok">⚫ Grok</a>
+                <a href="https://chat.deepseek.com/" target="_blank" rel="noopener noreferrer" class="llm-btn deepseek">🔷 DeepSeek</a>
+                <a href="https://www.kimi.ai/es-419" target="_blank" rel="noopener noreferrer" class="llm-btn kimi">🟡 KIMI</a>
+                <a href="https://glm5.app/es/glm-5-3-flash" target="_blank" rel="noopener noreferrer" class="llm-btn glm">🟤 GLM 5</a>
+            </div>
+        </div>
+
+        <!-- ACORDEÓN 3.1 -->
+        <div class="acordeon-item">
+            <button class="acordeon-btn abierto" onclick="toggleAcordeon(this, 'acordeon31')">
+                <span class="acordeon-num">3.1</span>
+                <span class="acordeon-titulo">Análisis de avatares (15 min)</span>
+                <span class="acordeon-flecha">▼</span>
+            </button>
+            <div class="acordeon-content visible" id="acordeon31">
+                <h4>🎯 Construye tu prompt dinámico</h4>
+                <p>Completa los 3 campos para generar tu prompt personalizado. Este prompt se combinará automáticamente y lo podrás copiar para pegarlo en cualquier LLM.</p>
+
+                <div class="form-group">
+                    <label for="campoInstructor">1. Soy instructor de: <span class="ejemplo">(Ej: electricidad industrial, cocina, gestión administrativa)</span></label>
+                    <input type="text" id="campoInstructor" placeholder="Escribe tu área de formación..." oninput="generarPromptDinamico()">
+                </div>
+
+                <div class="form-group">
+                    <label for="campoProducto">2. Quiero que los aprendices entreguen este producto: <span class="ejemplo">(Ej: un informe técnico, un prototipo, una propuesta)</span></label>
+                    <input type="text" id="campoProducto" placeholder="Escribe el producto esperado..." oninput="generarPromptDinamico()">
+                </div>
+
+                <div class="form-group">
+                    <label for="campoTiempo">3. En este tiempo: <span class="ejemplo">(Ej: 4 semanas, 20 horas, 3 sesiones de 2 horas)</span></label>
+                    <input type="text" id="campoTiempo" placeholder="Escribe el tiempo disponible..." oninput="generarPromptDinamico()">
+                </div>
+
+                <div class="form-group">
+                    <label>📝 Prompt generado:</label>
+                    <textarea id="promptGenerado" readonly></textarea>
+                </div>
+
+                <button class="btn-accion copiar" onclick="copiarPrompt('promptGenerado', this)">📋 Copiar prompt</button>
+                <button class="btn-accion limpiar" onclick="limpiarPrompt()">🔄 Limpiar campos</button>
+                <button class="btn-accion descargar" onclick="descargarAvatares()">📥 Descargar avatares.txt</button>
+
+                <div style="margin-top:20px; padding:15px 18px; background:#f8f9fa; border-radius:8px; border-left:4px solid var(--sena-verde);">
+                    <p style="margin:0; font-size:0.9rem;"><strong>📋 Instrucciones:</strong></p>
+                    <ol style="margin:10px 0 0 20px; font-size:0.88rem; color:#555;">
+                        <li>Copia tu prompt dinámico.</li>
+                        <li>Abre un LLM (botones de arriba).</li>
+                        <li>Pega el prompt y sube el archivo avatares.txt.</li>
+                        <li>Ejecuta y compara con otros LLMs.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACORDEÓN 3.2 -->
+        <div class="acordeon-item">
+            <button class="acordeon-btn" onclick="toggleAcordeon(this, 'acordeon32')">
+                <span class="acordeon-num">3.2</span>
+                <span class="acordeon-titulo">Análisis de imagen (15 min)</span>
+                <span class="acordeon-flecha">▼</span>
+            </button>
+            <div class="acordeon-content" id="acordeon32">
+                <h4>📷 Analiza una imagen de accidente de tránsito</h4>
+                <p>Descarga la imagen, súbela a un LLM multimodal y prueba dos niveles de análisis: uno superficial y uno profundo. Compara los resultados.</p>
+
+                <button class="btn-accion descargar" onclick="descargarImagen()">📥 Descargar accidente.jpg</button>
+
+                <div style="margin-top:20px;">
+                    <h5 style="font-size:0.95rem; margin-bottom:10px; color:var(--sena-rojo);">🔴 PROMPT A: Análisis superficial</h5>
+                    <div class="prompt-box" id="promptA">
+                        <span class="prompt-label">Prompt A</span>
+                        "Describe esta imagen."
+                    </div>
+                    <button class="btn-accion copiar" onclick="copiarPrompt('promptA', this)">📋 Copiar prompt A</button>
+                </div>
+
+                <div style="margin-top:20px;">
+                    <h5 style="font-size:0.95rem; margin-bottom:10px; color:var(--sena-verde);">🟢 PROMPT B: Análisis profundo</h5>
+                    <div class="prompt-box" id="promptB">
+                        <span class="prompt-label">Prompt B</span>
+                        "Analiza con profundidad esta imagen. Describe: 
+• La escena completa (vehículos, personas, señales, infraestructura).
+• Los actores involucrados y sus roles.
+• Las reglas de tránsito que se ven involucradas.
+• Las posibles causas del incidente.
+• Las consecuencias legales y humanas.
+• Las lecciones para la formación técnica."
+                    </div>
+                    <button class="btn-accion copiar" onclick="copiarPrompt('promptB', this)">📋 Copiar prompt B</button>
+                </div>
+
+                <div style="margin-top:20px; padding:15px 18px; background:#f8f9fa; border-radius:8px; border-left:4px solid var(--sena-verde);">
+                    <p style="margin:0; font-size:0.9rem;"><strong>📋 Instrucciones:</strong></p>
+                    <ol style="margin:10px 0 0 20px; font-size:0.88rem; color:#555;">
+                        <li>Sube accidente.jpg a un LLM multimodal.</li>
+                        <li>Pega el prompt A y observa la respuesta.</li>
+                        <li>Pega el prompt B y observa la respuesta.</li>
+                        <li>Compara: ¿en qué se diferencia el análisis profundo?</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACORDEÓN 3.3 -->
+        <div class="acordeon-item">
+            <button class="acordeon-btn" onclick="toggleAcordeon(this, 'acordeon33')">
+                <span class="acordeon-num">3.3</span>
+                <span class="acordeon-titulo">Análisis de audio (15 min)</span>
+                <span class="acordeon-flecha">▼</span>
+            </button>
+            <div class="acordeon-content" id="acordeon33">
+                <h4>🎧 Analiza un audio sobre aprendizaje</h4>
+                <p>Descarga el audio, súbelo a un LLM multimodal y pídele una transcripción, un DOFA y tres posturas argumentadas.</p>
+
+                <button class="btn-accion descargar" onclick="descargarAudio()">📥 Descargar aprendificación.mp3</button>
+
+                <div style="margin-top:20px;">
+                    <h5 style="font-size:0.95rem; margin-bottom:10px; color:var(--sena-verde);">📝 PROMPT ESPECIALIZADO</h5>
+                    <div class="prompt-box" id="promptAudio">
+                        <span class="prompt-label">Prompt para audio</span>
+                        "Analiza este audio sobre aprendizaje. Realiza las siguientes tareas:
+
+1. TRANSCRIPCIÓN: Transcribe el contenido completo del audio.
+
+2. DOFA: Genera un análisis DOFA sobre el tema del audio, con al menos 3 elementos por categoría (Debilidades, Oportunidades, Fortalezas, Amenazas).
+
+3. POSTURA A FAVOR: Presenta 3 argumentos que apoyen la tesis principal del audio.
+
+4. POSTURA EN CONTRA: Presenta 3 argumentos que cuestionen o maticen la tesis principal.
+
+5. POSTURA NEUTRA: Presenta 3 consideraciones que dependan del contexto o de condiciones específicas.
+
+Presenta todo de forma estructurada y clara."
+                    </div>
+                    <button class="btn-accion copiar" onclick="copiarPrompt('promptAudio', this)">📋 Copiar prompt</button>
+                </div>
+
+                <div style="margin-top:20px; padding:15px 18px; background:#f8f9fa; border-radius:8px; border-left:4px solid var(--sena-verde);">
+                    <p style="margin:0; font-size:0.9rem;"><strong>📋 Instrucciones:</strong></p>
+                    <ol style="margin:10px 0 0 20px; font-size:0.88rem; color:#555;">
+                        <li>Sube aprendificación.mp3 a un LLM multimodal.</li>
+                        <li>Pega el prompt especializado.</li>
+                        <li>Compara el DOFA y las posturas entre LLMs.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACORDEÓN 3.4 -->
+        <div class="acordeon-item">
+            <button class="acordeon-btn" onclick="toggleAcordeon(this, 'acordeon34')">
+                <span class="acordeon-num">3.4</span>
+                <span class="acordeon-titulo">Análisis de video (15 min)</span>
+                <span class="acordeon-flecha">▼</span>
+            </button>
+            <div class="acordeon-content" id="acordeon34">
+                <h4>🎬 Analiza un video de tu área</h4>
+                <p>Pega la URL de un video de YouTube (o cualquier plataforma) y el prompt se combinará automáticamente para que lo pegues en un LLM multimodal.</p>
+
+                <div class="form-group">
+                    <label for="campoURL">📝 Pega la URL del video:</label>
+                    <input type="text" id="campoURL" placeholder="https://www.youtube.com/watch?v=..." oninput="generarPromptVideo()">
+                </div>
+
+                <div class="form-group">
+                    <label>📝 Prompt generado (se combina con la URL):</label>
+                    <textarea id="promptVideo" readonly></textarea>
+                </div>
+
+                <button class="btn-accion copiar" onclick="copiarPrompt('promptVideo', this)">📋 Copiar prompt</button>
+
+                <div style="margin-top:20px; padding:15px 18px; background:#f8f9fa; border-radius:8px; border-left:4px solid var(--sena-verde);">
+                    <p style="margin:0; font-size:0.9rem;"><strong>📋 Instrucciones:</strong></p>
+                    <ol style="margin:10px 0 0 20px; font-size:0.88rem; color:#555;">
+                        <li>Pega la URL del video.</li>
+                        <li>Copia el prompt generado.</li>
+                        <li>Pégalo en un LLM multimodal.</li>
+                        <li>Compara los análisis entre LLMs.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================
+         PESTAÑA 4: TRANSFERENCIA Y CIERRE
+         ============================================ -->
+    <div id="transferencia" class="tab-content">
+        <h2>🧠 Transferencia y Cierre</h2>
+        <p><em>"Pensamiento crítico estructurado y curaduría"</em></p>
+        <p><strong>Objetivo:</strong> Transferir lo aprendido a un análisis crítico estructurado (DOFA) y responder las preguntas activadoras del inicio.</p>
+        <p><strong>Duración:</strong> 35 minutos</p>
+
+        <!-- PROMPT DE TRANSFERENCIA -->
+        <div class="bloque transferencia" style="background:#fffde7; border-left:5px solid var(--sena-dorado); border-radius:0 8px 8px 0; padding:20px 22px; margin:20px 0;">
+            <h3 style="color:#e65100; margin-top:0; display:flex; align-items:center; gap:8px;">🎯 Construye tu prompt de Transferencia</h3>
+            <p>Escribe tu área de formación y el prompt se generará automáticamente. Este prompt integra el DOFA y las 3 categorías de argumentos.</p>
+
+            <div class="form-group">
+                <label for="campoInstructorTransferencia">Soy instructor de: <span class="ejemplo">(Ej: electricidad industrial, cocina, gestión administrativa)</span></label>
+                <input type="text" id="campoInstructorTransferencia" placeholder="Escribe tu área de formación..." oninput="generarPromptTransferencia()">
+                <button class="btn-accion limpiar" onclick="copiarAreaDesde31()" style="margin-top:8px;">📋 Copiar área de 3.1</button>
+            </div>
+
+            <div class="form-group">
+                <label>📝 Prompt generado:</label>
+                <textarea id="promptTransferencia" readonly style="min-height:200px;"></textarea>
+            </div>
+
+            <button class="btn-accion copiar" onclick="copiarPrompt('promptTransferencia', this)">📋 Copiar prompt</button>
+            <button class="btn-accion limpiar" onclick="limpiarTransferencia()">🔄 Limpiar todo</button>
+        </div>
+
+        <!-- RESPUESTA A LAS PREGUNTAS ACTIVADORAS -->
+        <div class="respuesta-faro">
+            <h4>🔦 Respuesta a las Preguntas Activadoras</h4>
+            <p>Con base en todo lo aprendido en este taller, redacta tu respuesta argumentada a cada una de las preguntas iniciales:</p>
+
+            <!-- Pregunta 1 -->
+            <div class="acordeon-pregunta">
+                <button class="pregunta-btn abierto" onclick="togglePregunta(this, 'pregunta1')">
+                    <span class="pregunta-icono">🔵</span>
+                    <span class="pregunta-texto">"¿Qué hace que una pregunta a la IA sea 'poderosa' y capaz de generar una respuesta que realmente transforme mi práctica docente?"</span>
+                    <span class="pregunta-flecha">▼</span>
+                </button>
+                <div class="pregunta-content visible" id="pregunta1">
+                    <textarea id="respuesta1" placeholder="Escribe aquí tu respuesta a la pregunta 1..." oninput="guardarRespuestas()"></textarea>
+                </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="acordeon-pregunta">
+                <button class="pregunta-btn" onclick="togglePregunta(this, 'pregunta2')">
+                    <span class="pregunta-icono">🟠</span>
+                    <span class="pregunta-texto">"¿Puede una IA 'entender' realmente el mundo como lo hacemos los humanos, o solo procesa patrones? ¿Qué implicaciones tiene esto para mi rol como instructor?"</span>
+                    <span class="pregunta-flecha">▼</span>
+                </button>
+                <div class="pregunta-content" id="pregunta2">
+                    <textarea id="respuesta2" placeholder="Escribe aquí tu respuesta a la pregunta 2..." oninput="guardarRespuestas()"></textarea>
+                </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="acordeon-pregunta">
+                <button class="pregunta-btn" onclick="togglePregunta(this, 'pregunta3')">
+                    <span class="pregunta-icono">🟢</span>
+                    <span class="pregunta-texto">"¿Cómo puedo pasar de ser un 'usuario pasivo' de la IA a un 'arquitecto crítico' de experiencias de aprendizaje mediadas por IA?"</span>
+                    <span class="pregunta-flecha">▼</span>
+                </button>
+                <div class="pregunta-content" id="pregunta3">
+                    <textarea id="respuesta3" placeholder="Escribe aquí tu respuesta a la pregunta 3..." oninput="guardarRespuestas()"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <div class="footer">
+        <p><strong>Bootcamp 1: Interrogar con Criterio</strong> · Ruta de Aprendizaje: De Cero a Experto en IA para Formadores SENA</p>
+        <p>Nueva Taxonomía del Aprendizaje con IA · 7 Estaciones · Nivel Explorador</p>
+        <p style="margin-top:8px;">HTML/CSS/JS Vanilla · SENA 2026</p>
+    </div>
+
+</div>
+
+<!-- ============================================
+     SCRIPT
+     ============================================ -->
+<script>
+    // ============================================
+    // 1. PESTAÑAS PRINCIPALES
+    // ============================================
+    function openTab(evt, tabName) {
+        var i, tabContent, tabBtn;
+        tabContent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabContent.length; i++) tabContent[i].classList.remove("active");
+        tabBtn = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tabBtn.length; i++) tabBtn[i].classList.remove("active");
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+
+    // ============================================
+    // 2. SUB-PESTAÑAS
+    // ============================================
+    function openSubTab(evt, subTabName) {
+        var i, subTabContent, subTabBtn;
+        subTabContent = document.getElementsByClassName("subtab-content");
+        for (i = 0; i < subTabContent.length; i++) subTabContent[i].classList.remove("active");
+        subTabBtn = document.getElementsByClassName("subtab-btn");
+        for (i = 0; i < subTabBtn.length; i++) subTabBtn[i].classList.remove("active");
+        document.getElementById(subTabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+
+    // ============================================
+    // 3. TOGGLE CIERRE REFLEXIÓN
+    // ============================================
+    function toggleCierre() {
+        var contenido = document.getElementById("cierreContenido");
+        var boton = document.getElementById("btnToggleCierre");
+        contenido.classList.toggle("visible");
+        if (contenido.classList.contains("visible")) {
+            boton.innerHTML = "🔗 Ocultar cierre de la Reflexión Inicial";
+        } else {
+            boton.innerHTML = "🔗 Ver cierre de la Reflexión Inicial";
+        }
+    }
+
+    // ============================================
+    // 4. TOGGLES DE CONTEXTO
+    // ============================================
+    function toggleContexto(btn, contentId) {
+        var contenido = document.getElementById(contentId);
+        contenido.classList.toggle("visible");
+        btn.classList.toggle("abierto");
+    }
+
+    // ============================================
+    // 5. ACORDEONES DE APROPIACIÓN
+    // ============================================
+    function toggleAcordeon(btn, contentId) {
+        var contenido = document.getElementById(contentId);
+        contenido.classList.toggle("visible");
+        btn.classList.toggle("abierto");
+    }
+
+    // ============================================
+    // 6. PROMPT DINÁMICO 3.1
+    // ============================================
+    function generarPromptDinamico() {
+        var instructor = document.getElementById('campoInstructor').value.trim();
+        var producto = document.getElementById('campoProducto').value.trim();
+        var tiempo = document.getElementById('campoTiempo').value.trim();
+        
+        var prompt = "";
+        
+        if (instructor || producto || tiempo) {
+            prompt = "Actúa como un experto en pedagogía para formación técnica en Colombia.\n\n";
+            prompt += "Soy instructor de " + (instructor || "[tu área]") + " ";
+            prompt += "y necesito que los aprendices entreguen " + (producto || "[tu producto]") + " ";
+            prompt += "en un plazo de " + (tiempo || "[tu tiempo]") + ".\n\n";
+            prompt += "Te comparto 20 perfiles de aprendices con rasgos diversos. Analízalos y genera 4 rutas de aprendizaje diferenciadas para un proyecto común. Cada ruta debe incluir: actividad, evaluación y criterios de logro, ajustados al tiempo disponible.";
+        } else {
+            prompt = "Completa los 3 campos de arriba para generar tu prompt personalizado...";
+        }
+        
+        document.getElementById('promptGenerado').value = prompt;
+        
+        localStorage.setItem('promptDinamico31', prompt);
+        localStorage.setItem('campoInstructor', instructor);
+        localStorage.setItem('campoProducto', producto);
+        localStorage.setItem('campoTiempo', tiempo);
+    }
+
+    function limpiarPrompt() {
+        document.getElementById('campoInstructor').value = '';
+        document.getElementById('campoProducto').value = '';
+        document.getElementById('campoTiempo').value = '';
+        document.getElementById('promptGenerado').value = '';
+        localStorage.removeItem('promptDinamico31');
+        localStorage.removeItem('campoInstructor');
+        localStorage.removeItem('campoProducto');
+        localStorage.removeItem('campoTiempo');
+    }
+
+    // ============================================
+    // 7. PROMPT DINÁMICO 3.4 (VIDEO)
+    // ============================================
+    function generarPromptVideo() {
+        var url = document.getElementById('campoURL').value.trim();
+        var prompt = "";
+        
+        if (url) {
+            prompt = "Analiza este video: " + url + "\n\n";
+            prompt += "Describe lo que sucede, extrae los conceptos técnicos principales y propón una actividad de aprendizaje para aprendices de [tu programa].\n\n";
+            prompt += "Incluye: objetivo de la actividad, materiales, pasos y criterios de evaluación.";
+        } else {
+            prompt = "Pega la URL del video arriba para generar tu prompt personalizado...";
+        }
+        
+        document.getElementById('promptVideo').value = prompt;
+    }
+
+    // ============================================
+    // 8. PROMPT DINÁMICO TRANSFERENCIA
+    // ============================================
+    function generarPromptTransferencia() {
+        var instructor = document.getElementById('campoInstructorTransferencia').value.trim();
+        var prompt = "";
+        
+        if (instructor) {
+            prompt = "Actúa como un experto en educación técnica. Genera un análisis DOFA (Debilidades, Oportunidades, Fortalezas, Amenazas) sobre el uso de IA en la educación técnica en Colombia, específicamente en el SENA, para aprendices de " + instructor + ".\n\n";
+            prompt += "Luego, para cada categoría del DOFA, genera:\n";
+            prompt += "• 3 argumentos a favor y evalúalos críticamente.\n";
+            prompt += "• 3 argumentos en contra y evalúalos críticamente.\n";
+            prompt += "• 3 consideraciones neutras y evalúalas críticamente.\n\n";
+            prompt += "Incluye al menos 3 elementos por categoría del DOFA.";
+        } else {
+            prompt = "Escribe tu área de formación arriba para generar el prompt...";
+        }
+        
+        document.getElementById('promptTransferencia').value = prompt;
+        localStorage.setItem('promptTransferencia', prompt);
+        localStorage.setItem('campoInstructorTransferencia', instructor);
+    }
+
+    function copiarAreaDesde31() {
+        var area31 = localStorage.getItem('campoInstructor') || '';
+        if (area31) {
+            document.getElementById('campoInstructorTransferencia').value = area31;
+            generarPromptTransferencia();
+        } else {
+            alert('No hay área guardada en la Actividad 3.1. Por favor, completa primero el campo en 3.1.');
+        }
+    }
+
+    function limpiarTransferencia() {
+        document.getElementById('campoInstructorTransferencia').value = '';
+        document.getElementById('promptTransferencia').value = '';
+        document.getElementById('respuesta1').value = '';
+        document.getElementById('respuesta2').value = '';
+        document.getElementById('respuesta3').value = '';
+        localStorage.removeItem('promptTransferencia');
+        localStorage.removeItem('campoInstructorTransferencia');
+        localStorage.removeItem('respuestaPregunta1');
+        localStorage.removeItem('respuestaPregunta2');
+        localStorage.removeItem('respuestaPregunta3');
+    }
+
+    // ============================================
+    // 9. ACORDEÓN DE PREGUNTAS
+    // ============================================
+    function togglePregunta(btn, contentId) {
+        var contenido = document.getElementById(contentId);
+        contenido.classList.toggle("visible");
+        btn.classList.toggle("abierto");
+    }
+
+    // ============================================
+    // 10. GUARDAR RESPUESTAS
+    // ============================================
+    function guardarRespuestas() {
+        var r1 = document.getElementById('respuesta1').value;
+        var r2 = document.getElementById('respuesta2').value;
+        var r3 = document.getElementById('respuesta3').value;
+        
+        localStorage.setItem('respuestaPregunta1', r1);
+        localStorage.setItem('respuestaPregunta2', r2);
+        localStorage.setItem('respuestaPregunta3', r3);
+    }
+
+    // ============================================
+    // 11. COPIAR PROMPT
+    // ============================================
+    function copiarPrompt(elementId, btn) {
+        var elemento = document.getElementById(elementId);
+        var texto = "";
+        
+        if (elemento.tagName === 'TEXTAREA' || elemento.tagName === 'INPUT') {
+            texto = elemento.value;
+        } else {
+            texto = elemento.innerText || elemento.textContent;
+            texto = texto.replace(/^Prompt [AB]\s*/i, '').trim();
+        }
+        
+        navigator.clipboard.writeText(texto).then(function() {
+            var textoOriginal = btn.innerHTML;
+            btn.innerHTML = '✅ ¡Copiado!';
+            btn.classList.add('copiado');
+            setTimeout(function() {
+                btn.innerHTML = textoOriginal;
+                btn.classList.remove('copiado');
+            }, 2000);
+        }).catch(function(err) {
+            console.error('Error al copiar: ', err);
+            alert('No se pudo copiar. Por favor, selecciona el texto manualmente.');
+        });
+    }
+
+    // ============================================
+    // 12. DESCARGAR AVATARES.TXT
+    // ============================================
+    function descargarAvatares() {
+        var contenido = `========================================
+20 AVATARES SENA - PERFILES DE APRENDICES
+Insumo para el Bootcamp 1 - Análisis de TXT
+========================================
+
+INSTRUCCIONES:
+1. Copia este archivo y guárdalo como avatares.txt
+2. Súbelo a un LLM junto con tu prompt dinámico.
+3. Compara las respuestas entre distintos LLMs.
+
+========================================
+GRUPO 1: CREATIVOS (5)
+========================================
+
+#1 - Sofía 🎨
+- Rasgos: Imaginativa, inquieta, experimental. Le gusta explorar sin miedo al error.
+- Intereses: Diseño gráfico, arte digital, innovación, ilustración.
+- Estilo de aprendizaje: Visual-Práctico. Aprende viendo y haciendo.
+- Fortalezas: Creatividad, pensamiento divergente, originalidad.
+- Reto: Le cuesta seguir estructuras rígidas y cumplir plazos estrictos.
+
+#2 - Mateo 🎮
+- Rasgos: Curioso, pregunta constantemente, poco paciente con la teoría.
+- Intereses: Tecnología, videojuegos, gadgets, realidad virtual.
+- Estilo de aprendizaje: Kinestésico-Visual. Aprende experimentando.
+- Fortalezas: Curiosidad, adaptabilidad, aprendizaje rápido.
+- Reto: Se aburre con explicaciones largas y pierde el foco.
+
+#3 - Laura 🎭
+- Rasgos: Expresiva, comunicativa, le gusta contar historias.
+- Intereses: Comunicación, redes sociales, teatro, periodismo.
+- Estilo de aprendizaje: Auditivo-Verbal. Aprende escuchando y hablando.
+- Fortalezas: Comunicación, empatía, expresión.
+- Reto: Le cuesta concentrarse en tareas silenciosas o individuales.
+
+#4 - Carlos 🚀
+- Rasgos: Soñador, piensa en grande, desordenado pero visionario.
+- Intereses: Emprendimiento, liderazgo, deportes, startups.
+- Estilo de aprendizaje: Visual-Global. Aprende viendo el panorama completo.
+- Fortalezas: Visión estratégica, motivación, liderazgo inspirador.
+- Reto: Le cuesta aterrizar ideas y atender los detalles.
+
+#5 - Valeria 💜
+- Rasgos: Sensible, empática, le gusta ayudar y crear impacto social.
+- Intereses: Servicio social, psicología, arte terapia, voluntariado.
+- Estilo de aprendizaje: Verbal-Interpersonal. Aprende dialogando y reflexionando.
+- Fortalezas: Empatía, escucha activa, compromiso social.
+- Reto: Se afecta emocionalmente con facilidad ante críticas.
+
+========================================
+GRUPO 2: ANALÍTICOS (5)
+========================================
+
+#6 - Andrés 📐
+- Rasgos: Metódico, ordenado, le gusta seguir instrucciones al pie de la letra.
+- Intereses: Matemáticas, programación, lógica, ajedrez.
+- Estilo de aprendizaje: Secuencial-Lógico. Aprende paso a paso.
+- Fortalezas: Rigor, precisión, pensamiento estructurado.
+- Reto: Le cuesta adaptarse a cambios o improvisaciones.
+
+#7 - Daniela 🔬
+- Rasgos: Perfeccionista, detallista, crítica consigo misma y con los demás.
+- Intereses: Investigación, lectura, ciencia, análisis de datos.
+- Estilo de aprendizaje: Visual-Secuencial. Aprende leyendo y analizando.
+- Fortalezas: Profundidad, atención al detalle, pensamiento crítico.
+- Reto: Puede bloquearse por miedo a equivocarse.
+
+#8 - Felipe ⚙️
+- Rasgos: Racional, escéptico, cuestiona todo y busca evidencias.
+- Intereses: Ingeniería, física, debates, filosofía de la ciencia.
+- Estilo de aprendizaje: Lógico-Auditivo. Aprende cuestionando y argumentando.
+- Fortalezas: Pensamiento crítico, argumentación, rigor lógico.
+- Reto: Puede ser percibido como negativo o confrontativo.
+
+#9 - Paula 📊
+- Rasgos: Organizada, planifica todo, estructurada y orientada a resultados.
+- Intereses: Administración, finanzas, planeación, gestión de proyectos.
+- Estilo de aprendizaje: Secuencial-Verbal. Aprende organizando y verbalizando.
+- Fortalezas: Disciplina, gestión del tiempo, orientación a metas.
+- Reto: Le cuesta trabajar sin un plan claro o con ambigüedad.
+
+#10 - Ricardo 🌿
+- Rasgos: Observador, reflexivo, piensa antes de actuar.
+- Intereses: Naturaleza, biología, filosofía, meditación.
+- Estilo de aprendizaje: Reflexivo-Visual. Aprende observando y reflexionando.
+- Fortalezas: Serenidad, profundidad, pensamiento sistémico.
+- Reto: Puede tardar en tomar decisiones o participar activamente.
+
+========================================
+GRUPO 3: SOCIALES (5)
+========================================
+
+#11 - Camila 🌟
+- Rasgos: Extrovertida, carismática, líder natural que motiva a otros.
+- Intereses: Relaciones públicas, deportes, música, eventos.
+- Estilo de aprendizaje: Interpersonal-Kinestésico. Aprende interactuando y moviéndose.
+- Fortalezas: Liderazgo, energía, comunicación asertiva.
+- Reto: Puede acaparar la conversación y no escuchar a todos.
+
+#12 - David 🤝
+- Rasgos: Sociable, mediador, evita conflictos y busca consensos.
+- Intereses: Psicología, trabajo social, comunicación, mediación.
+- Estilo de aprendizaje: Verbal-Interpersonal. Aprende dialogando y negociando.
+- Fortalezas: Empatía, mediación, trabajo en equipo.
+- Reto: Le cuesta tomar decisiones impopulares o confrontar.
+
+#13 - Andrea 💚
+- Rasgos: Colaboradora, apoya a los demás, paciente y servicial.
+- Intereses: Educación, enfermería, cocina, trabajo comunitario.
+- Estilo de aprendizaje: Interpersonal-Práctico. Aprende ayudando y haciendo.
+- Fortalezas: Colaboración, paciencia, servicio.
+- Reto: Puede descuidar sus propias necesidades por ayudar a otros.
+
+#14 - Julián ⚖️
+- Rasgos: Persuasivo, convincente, le gusta argumentar y debatir.
+- Intereses: Derecho, política, ventas, negociación.
+- Estilo de aprendizaje: Verbal-Lógico. Aprende debatiendo y persuadiendo.
+- Fortalezas: Argumentación, liderazgo, influencia.
+- Reto: Puede ser percibido como impositivo o dominante.
+
+#15 - Natalia 🌸
+- Rasgos: Empática, intuitiva, lee emociones y crea ambientes armónicos.
+- Intereses: Psicología, arte, literatura, acompañamiento emocional.
+- Estilo de aprendizaje: Intuitivo-Verbal. Aprende sintiendo y expresando.
+- Fortalezas: Inteligencia emocional, creatividad, escucha.
+- Reto: Puede absorber las emociones de otros y agotarse.
+
+========================================
+GRUPO 4: PRÁCTICOS (5)
+========================================
+
+#16 - Jorge 🔧
+- Rasgos: Pragmático, resuelve problemas, prefiere la acción rápida.
+- Intereses: Mecánica, construcción, deportes, trabajo de campo.
+- Estilo de aprendizaje: Kinestésico-Práctico. Aprende haciendo y desarmando.
+- Fortalezas: Resolución de problemas, iniciativa, pragmatismo.
+- Reto: Le cuesta la teoría abstracta y la reflexión pausada.
+
+#17 - Carolina ✂️
+- Rasgos: Creativa con las manos, le gusta construir y diseñar objetos.
+- Intereses: Carpintería, manualidades, diseño de modas, artesanía.
+- Estilo de aprendizaje: Visual-Kinestésico. Aprende viendo y creando con las manos.
+- Fortalezas: Creatividad manual, precisión, paciencia.
+- Reto: Puede frustrarse con tareas puramente digitales o teóricas.
+
+#18 - Diego ⚡
+- Rasgos: Competitivo, busca retos, directo y orientado a resultados.
+- Intereses: Electricidad, deportes extremos, emprendimiento.
+- Estilo de aprendizaje: Kinestésico-Visual. Aprende compitiendo y experimentando.
+- Fortalezas: Determinación, resistencia, orientación a logros.
+- Reto: Puede ser impaciente con quienes van más lento.
+
+#19 - Ana 🌾
+- Rasgos: Paciente, trabajadora, persistente y meticulosa.
+- Intereses: Agricultura, cocina, tejidos, trabajo artesanal.
+- Estilo de aprendizaje: Práctico-Secuencial. Aprende repitiendo y perfeccionando.
+- Fortalezas: Persistencia, disciplina, atención al detalle.
+- Reto: Puede ser lenta para adaptarse a nuevos métodos.
+
+#20 - Sebastián 🤖
+- Rasgos: Versátil, adaptable, aprende haciendo y experimentando.
+- Intereses: Mecatrónica, electrónica, robótica, impresión 3D.
+- Estilo de aprendizaje: Kinestésico-Visual. Aprende construyendo y probando.
+- Fortalezas: Adaptabilidad, curiosidad técnica, innovación.
+- Reto: Puede dispersarse por querer explorar demasiado.
+
+========================================
+FIN DEL ARCHIVO
+========================================`;
+
+        var blob = new Blob([contenido], { type: 'text/plain;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'avatares.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    // ============================================
+    // 13. DESCARGAR IMAGEN Y AUDIO
+    // ============================================
+    function descargarImagen() {
+        var a = document.createElement('a');
+        a.href = 'accidente.jpg';
+        a.download = 'accidente.jpg';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    function descargarAudio() {
+        var a = document.createElement('a');
+        a.href = 'aprendificación.mp3';
+        a.download = 'aprendificación.mp3';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    // ============================================
+    // 14. INICIALIZACIÓN
+    // ============================================
+    window.onload = function() {
+        // Restaurar 3.1
+        if (localStorage.getItem('campoInstructor')) {
+            document.getElementById('campoInstructor').value = localStorage.getItem('campoInstructor');
+        }
+        if (localStorage.getItem('campoProducto')) {
+            document.getElementById('campoProducto').value = localStorage.getItem('campoProducto');
+        }
+        if (localStorage.getItem('campoTiempo')) {
+            document.getElementById('campoTiempo').value = localStorage.getItem('campoTiempo');
+        }
+        if (localStorage.getItem('promptDinamico31')) {
+            document.getElementById('promptGenerado').value = localStorage.getItem('promptDinamico31');
+        } else {
+            generarPromptDinamico();
+        }
+        
+        // Restaurar Transferencia
+        if (localStorage.getItem('campoInstructorTransferencia')) {
+            document.getElementById('campoInstructorTransferencia').value = localStorage.getItem('campoInstructorTransferencia');
+        }
+        if (localStorage.getItem('promptTransferencia')) {
+            document.getElementById('promptTransferencia').value = localStorage.getItem('promptTransferencia');
+        }
+        
+        // Restaurar respuestas
+        if (localStorage.getItem('respuestaPregunta1')) {
+            document.getElementById('respuesta1').value = localStorage.getItem('respuestaPregunta1');
+        }
+        if (localStorage.getItem('respuestaPregunta2')) {
+            document.getElementById('respuesta2').value = localStorage.getItem('respuestaPregunta2');
+        }
+        if (localStorage.getItem('respuestaPregunta3')) {
+            document.getElementById('respuesta3').value = localStorage.getItem('respuestaPregunta3');
+        }
+    };
+</script>
+
+</body>
+</html>

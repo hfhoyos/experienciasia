@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodología 7 Bootcamps - Creación de Experiencias de Aprendizaje basadas en IA</title>
+    <style>
+        /* ====================================================
+           VARIABLES Y RESET
+           ==================================================== */
+        :root {
+            --sena-verde: #2E7D32;
+            --sena-verde-claro: #4CAF50;
+            --sena-azul: #1565C0;
+            --sena-gris: #263238;
+            --sena-naranja: #E65100;
+            --sena-rojo: #C62828;
+            --sena-dorado: #F9A825;
+            --sena-morado: #6A1B9A;
+            --sena-cyan: #00838F;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+            --radius: 14px;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: var(--sena-gris);
+            line-height: 1.6;
+        }
+
+        /* ====================================================
+           CONTENEDOR PRINCIPAL
+           ==================================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: var(--radius);
+            padding: 40px 45px;
+            box-shadow: var(--shadow);
+        }
+
+        /* ====================================================
+           HEADER
+           ==================================================== */
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            border-bottom: 5px solid var(--sena-verde);
+            position: relative;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--sena-verde), var(--sena-verde-claro));
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 6px 20px;
+            border-radius: 25px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+        }
+
+        .header h1 {
+            color: var(--sena-verde);
+            font-size: 2.1rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .header h1 small {
+            display: block;
+            font-size: 1rem;
+            color: var(--sena-azul);
+            font-weight: 500;
+            margin-top: 6px;
+            letter-spacing: 0;
+        }
+
+        .header .subtitulo {
+            color: #666;
+            font-size: 1.05rem;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* ====================================================
+           SECCIÓN DE PILARES METODOLÓGICOS
+           ==================================================== */
+        .pilares {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 22px;
+            margin: 30px 0 40px;
+        }
+
+        .pilar-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 28px 26px;
+            box-shadow: var(--shadow);
+            border-top: 6px solid var(--sena-verde);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pilar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pilar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(46,125,50,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .pilar-card .pilar-icono {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .pilar-card h3 {
+            color: var(--sena-verde);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pilar-card p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .pilar-card .pilar-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 3px 12px;
+            border-radius: 15px;
+            margin-top: 14px;
+        }
+
+        .pilar-card.situado { border-top-color: var(--sena-azul); }
+        .pilar-card.situado h3 { color: var(--sena-azul); }
+        .pilar-card.situado .pilar-tag { background: #E3F2FD; color: var(--sena-azul); }
+
+        .pilar-card.medida { border-top-color: var(--sena-naranja); }
+        .pilar-card.medida h3 { color: var(--sena-naranja); }
+        .pilar-card.medida .pilar-tag { background: #FFF3E0; color: var(--sena-naranja); }
+
+        .pilar-card.modular { border-top-color: var(--sena-morado); }
+        .pilar-card.modular h3 { color: var(--sena-morado); }
+        .pilar-card.modular .pilar-tag { background: #F3E5F5; color: var(--sena-morado); }
+
+        /* ====================================================
+           SECCIÓN DE BOOTCAMPS
+           ==================================================== */
+        .bootcamps-section {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            color: var(--sena-gris);
+            font-size: 1.7rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .section-title p {
+            color: #777;
+            font-size: 0.95rem;
+        }
+
+        .bootcamps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .bootcamp-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 22px 24px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-left: 6px solid #ccc;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .bootcamp-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .bootcamp-card .bc-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .bootcamp-card .bc-num {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .bootcamp-card .bc-info h3 {
+            font-size: 1.05rem;
+            color: var(--sena-gris);
+            line-height: 1.2;
+        }
+
+        .bootcamp-card .bc-info .bc-verbo {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+        }
+
+        .bootcamp-card .bc-desc {
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .bootcamp-card .bc-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 0.72rem;
+            color: #777;
+        }
+
+        .bootcamp-card .bc-meta span {
+            background: #f1f3f5;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .bootcamp-card .bc-producto {
+            margin-top: 10px;
+            font-size: 0.78rem;
+            color: var(--sena-verde);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Colores por bootcamp */
+        .bc-1 { border-left-color: var(--sena-morado); }
+        .bc-1 .bc-num { background: var(--sena-morado); }
+
+        .bc-2 { border-left-color: var(--sena-azul); }
+        .bc-2 .bc-num { background: var(--sena-azul); }
+
+        .bc-3 { border-left-color: var(--sena-cyan); }
+        .bc-3 .bc-num { background: var(--sena-cyan); }
+
+        .bc-4 { border-left-color: var(--sena-verde); }
+        .bc-4 .bc-num { background: var(--sena-verde); }
+
+        .bc-5 { border-left-color: var(--sena-naranja); }
+        .bc-5 .bc-num { background: var(--sena-naranja); }
+
+        .bc-6 { border-left-color: var(--sena-dorado); }
+        .bc-6 .bc-num { background: var(--sena-dorado); color: #333; }
+
+        .bc-7 { border-left-color: var(--sena-rojo); }
+        .bc-7 .bc-num { background: var(--sena-rojo); }
+
+        /* ====================================================
+           SECCIÓN DE CARACTERÍSTICAS CLAVE
+           ==================================================== */
+        .caracteristicas {
+            background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e9 100%);
+            border-radius: var(--radius);
+            padding: 35px 30px;
+            margin: 40px 0;
+            border-left: 6px solid var(--sena-verde);
+        }
+
+        .caracteristicas h2 {
+            color: var(--sena-verde);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .caracteristicas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .caracteristica-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .caracteristica-item .ci-icono {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .caracteristica-item .ci-texto h4 {
+            font-size: 0.95rem;
+            color: var(--sena-gris);
+            margin-bottom: 4px;
+        }
+
+        .caracteristica-item .ci-texto p {
+            font-size: 0.82rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* ====================================================
+           FLUJOGRAMA DE PROGRESIÓN
+           ==================================================== */
+        .flujograma-metodologia {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            border-radius: var(--radius);
+            padding: 30px 25px;
+            margin: 30px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.78rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        /* ====================================================
+           TABLA RESUMEN
+           ==================================================== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.88rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        thead th {
+            background: var(--sena-gris);
+            color: #fff;
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background: #e8f5e9;
+        }
+
+        /* ====================================================
+           CTA / CIERRE
+           ==================================================== */
+        .cta {
+            background: linear-gradient(135deg, var(--sena-verde) 0%, #1b5e20 100%);
+            color: #fff;
+            border-radius: var(--radius);
+            padding: 35px 30px;
+            text-align: center;
+            margin: 40px 0 20px;
+            box-shadow: 0 8px 25px rgba(46,125,50,0.3);
+        }
+
+        .cta h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .cta p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta .cta-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 20px;
+            border-radius: 25px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+
+        /* ====================================================
+           FOOTER
+           ==================================================== */
+        .footer {
+            margin-top: 35px;
+            padding-top: 22px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .footer strong {
+            color: var(--sena-verde);
+        }
+
+        /* ====================================================
+           RESPONSIVE
+           ==================================================== */
+        @media (max-width: 768px) {
+            body { padding: 15px 10px; }
+            .container { padding: 22px 18px; }
+            .header h1 { font-size: 1.4rem; }
+            .pilares { grid-template-columns: 1fr; }
+            .bootcamps-grid { grid-template-columns: 1fr; }
+            .caracteristicas-grid { grid-template-columns: 1fr; }
+            .flujograma-metodologia { font-size: 0.62rem; padding: 18px 12px; }
+            table { font-size: 0.75rem; }
+            thead th, tbody td { padding: 7px 6px; }
+            .cta { padding: 25px 20px; }
+        }
+
+        /* ====================================================
+           IMPRESIÓN
+           ==================================================== */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 20px; }
+            .flujograma-metodologia { background: #f5f5f5; color: #000; border: 1px solid #ccc; }
+            .cta { background: #f5f5f5; color: #000; border: 1px solid #ccc; box-shadow: none; }
+            .cta h2 { color: #000; }
+            .pilar-card, .bootcamp-card { break-inside: avoid; }
+            table { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <div class="header">
+        <div class="badge">Curso · Construcción de Experiencias de Aprendizaje basadas en IA</div>
+        <h1>
+            METODOLOGÍA DE LOS 7 BOOTCAMPS
+            <small>Ruta de Aprendizaje: De Cero a Experto en IA para Formadores SENA</small>
+        </h1>
+        <p class="subtitulo">Aprendizaje situado · Aprendizaje a la medida · Progresión auto-gestionada</p>
+    </div>
+
+    <!-- ============================================
+         PILARES METODOLÓGICOS
+         ============================================ -->
+    <div class="pilares">
+        <div class="pilar-card situado">
+            <span class="pilar-icono">📍</span>
+            <h3>Aprendizaje Situado</h3>
+            <p>
+                Cada bootcamp parte de <strong>problemas reales del contexto SENA</strong>: los RAP de los programas, 
+                los perfiles de los aprendices, las condiciones del aula y los recursos disponibles. 
+                No se aprende IA en abstracto, sino <strong>resolviendo situaciones auténticas</strong> de la práctica docente.
+            </p>
+            <span class="pilar-tag">Contexto real</span>
+        </div>
+
+        <div class="pilar-card medida">
+            <span class="pilar-icono">📐</span>
+            <h3>Aprendizaje a la Medida</h3>
+            <p>
+                Cada participante avanza <strong>a su propio ritmo</strong>, elige su RAP, su programa y su nivel de profundidad. 
+                Los bootcamps son <strong>modulares y auto-gestionados</strong>: se adaptan a la disponibilidad (1-4 horas semanales), 
+                al punto de partida y a las metas personales de cada instructor.
+            </p>
+            <span class="pilar-tag">Ritmo personal</span>
+        </div>
+
+        <div class="pilar-card modular">
+            <span class="pilar-icono">🧩</span>
+            <h3>Progresión Modular</h3>
+            <p>
+                Los 7 bootcamps son <strong>escalones independientes pero conectados</strong>. Cada uno tiene un objetivo único, 
+                un producto verificable y un mecanismo de validación. No se avanza al siguiente hasta cumplir el producto del actual. 
+                <strong>Todos persiguen el mismo objetivo final</strong>, pero cada uno lo alcanza a su manera.
+            </p>
+            <span class="pilar-tag">Escalable</span>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SECCIÓN DE BOOTCAMPS
+         ============================================ -->
+    <div class="bootcamps-section">
+        <div class="section-title">
+            <h2>🗺️ Los 7 Bootcamps</h2>
+            <p>Cada bootcamp = un verbo taxonómico + un nivel + un producto verificable</p>
+        </div>
+
+        <div class="bootcamps-grid">
+
+            <!-- Bootcamp 1 -->
+            <div class="bootcamp-card bc-1">
+                <div class="bc-header">
+                    <div class="bc-num">1</div>
+                    <div class="bc-info">
+                        <div class="bc-verbo">Interrogar</div>
+                        <h3>Explorador</h3>
+                    </div>
+                </div>
+                <p class="bc-desc">
+                    Cerrar la brecha. Aprender a <strong>preguntar con criterio</strong>, comparar LLMs, 
+                    explorar multimodalidad y construir una tabla benchmark.
+                </p>
+                <div class="bc-meta">
+                    <span>⏱ 2 horas</span>
+                    <span>👤 Individual</span>
+                </div>
+                <div class="bc-producto">📦 Tabla benchmark + análisis multimodal</div>
+            </div>
+
+            <!-- Bootcamp 2 -->
+            <div class="bootcamp-card bc-2">
+                <div class="bc-header">
+                    <div class="bc-num">2</div>
+                    <div class="bc-info">
+                        <div class="bc-verbo">Contextualizar</div>
+                        <h3>Aprendiz</h3>
+                    </div>
+                </div>
+                <p class="bc-desc">
+                    Diseñar experiencias. <strong>Adaptar los recursos de IA al contexto SENA</strong>: 
+                    RAP, perfiles de aprendices, condiciones del aula.
+                </p>
+                <div class="bc-meta">
+                    <span>⏱ 12 horas</span>
+                    <span>👥 Grupal</span>
+                </div>
+                <div class="bc-producto">📦 3 recursos + 1 experiencia completa</div>
+            </div>
+
+            <!-- Bootcamp 3 -->
+            <div class="bootcamp-card bc-3">
+                <div class="bc-header">
+                    <div class="bc-num">3</div>
+                    <div class="bc-info">
+                        <div class="bc-verbo">Contrastar</div>
+                        <h3>Practicante</h3>
+                    </div>
+                </div>
+                <p class="bc-desc">
+                    IA en el aula. <strong>Implementar la experiencia</strong>, recoger evidencia 
+                    y comparar los resultados vs. las expectativas iniciales.
+                </p>
+                <div class="bc-meta">
+                    <span>⏱ 30 días</span>
+                    <span>👤 Autónomo</span>
+                </div>
+                <div class="bc-producto">📦 Implementación documentada + reflexión</div>
+            </div>
+
+            <!-- Bootcamp 4 -->
+            <div class="bootcamp-card bc-4">
+                <div class="bc-header">
+                    <div class="bc-num">4</div>
+                    <div class="bc-info">
+                        <div class="bc-verbo">Verificar</div>
+                        <h3>Diseñador</h3>
+                    </div>
+                </div>
+                <p class="bc-desc">
+                    Sistema completo. <strong>Diseñar rutas diferenciadas</strong> para 20 avatares, 
+                    crear artefacto HTML y verificar cada componente con criterios de calidad.
+                </p>
+                <div class="bc-meta">
+                    <span>⏱ 20 horas</span>
+                    <span>👥 Grupal</span>
+                </div>
+                <div class="bc-producto">📦 Sistema completo + artefacto HTML</div>
+            </div>
+
+            <!-- Bootcamp 5 -->
+            <div class="bootcamp-card bc-5">
+                <div class="bc-header">
+                    <div class="bc-num">5</div>
+                    <div class="bc-info">
+                        <div class="bc-verbo">Curar</div>
+                        <h3>Mentor</h3>
+                    </div>
+                </div>
+                <p class="bc-desc">
+                    Formación de formadores. <strong>Seleccionar, organizar y enriquecer</strong> el conocimiento 
+                    en un taller replicable y mentorizar a otros colegas.
+                </p>
+                <div class="bc-meta">
+                    <span>⏱ 40 horas</span>
+                    <span>👥 Mentoría</span>
+                </div>
+                <div class="bc-producto">📦 Taller dictado + automatización + mentoría</div>
+            </div>
+
+            <!-- Bootcamp 6 -->
+            <div class="bootcamp-card bc-6">
+                <div class="bc-header">
+                    <div class="bc-num">6</div>
+                    <div class="bc-info">
+                        <div class="bc-verbo">Arbitrar</div>
+                        <h3>Experto</h3>
+                    </div>
+                </div>
+                <p class="bc-desc">
+                    Innovación y liderazgo. <strong>Tomar decisiones informadas y éticas</strong>, 
+                    mediar entre criterios y construir acuerdos institucionales.
+                </p>
+                <div class="bc-meta">
+                    <span>⏱ Continuo</span>
+                    <span>👤 Investigación</span>
+                </div>
+                <div class="bc-producto">📦 Artículo + guía metodológica replicable</div>
+            </div>
+
+            <!-- Bootcamp 7 -->
+            <div class="bootcamp-card bc-7">
+                <div class="bc-header">
+                    <div class="bc-num">7</div>
+                    <div class="bc-info">
+                        <div class="bc-verbo">Cocrear</div>
+                        <h3>Líder</h3>
+                    </div>
+                </div>
+                <p class="bc-desc">
+                    Cocreación y comunidad. <strong>Generar valor nuevo y compartido</strong> en colaboración 
+                    con otros actores, integrando saberes y perspectivas.
+                </p>
+                <div class="bc-meta">
+                    <span>⏱ Continuo</span>
+                    <span>👥 Red nacional</span>
+                </div>
+                <div class="bc-producto">📦 Red de mentores + publicación colaborativa</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         CARACTERÍSTICAS CLAVE
+         ============================================ -->
+    <div class="caracteristicas">
+        <h2>✨ ¿Qué hace única esta metodología?</h2>
+
+        <div class="caracteristicas-grid">
+            <div class="caracteristica-item">
+                <span class="ci-icono">🎯</span>
+                <div class="ci-texto">
+                    <h4>Mismo objetivo, múltiples rutas</h4>
+                    <p>Todos los participantes llegan al mismo destino, pero cada uno elige su camino, su ritmo y su profundidad.</p>
+                </div>
+            </div>
+
+            <div class="caracteristica-item">
+                <span class="ci-icono">🔓</span>
+                <div class="ci-texto">
+                    <h4>Auto-gestionado</h4>
+                    <p>El participante decide cuándo y cómo avanzar. Los recursos están disponibles 24/7 y el acompañamiento es puntual.</p>
+                </div>
+            </div>
+
+            <div class="caracteristica-item">
+                <span class="ci-icono">✅</span>
+                <div class="ci-texto">
+                    <h4>Producto verificable</h4>
+                    <p>Cada bootcamp tiene una evidencia tangible. No hay ambigüedad: o el producto cumple, o se ajusta y se vuelve a intentar.</p>
+                </div>
+            </div>
+
+            <div class="caracteristica-item">
+                <span class="ci-icono">🤝</span>
+                <div class="ci-texto">
+                    <h4>Comunidad de práctica</h4>
+                    <p>Los que avanzan más rápido mentorizan a los que van más lento. El conocimiento se construye en colectivo.</p>
+                </div>
+            </div>
+
+            <div class="caracteristica-item">
+                <span class="ci-icono">📊</span>
+                <div class="ci-texto">
+                    <h4>Progresión visible</h4>
+                    <p>Cada escalón completado es un logro visible. El participante sabe exactamente dónde está y qué le falta.</p>
+                </div>
+            </div>
+
+            <div class="caracteristica-item">
+                <span class="ci-icono">🌱</span>
+                <div class="ci-texto">
+                    <h4>Sostenible en el tiempo</h4>
+                    <p>Se adapta a la disponibilidad real (1-4 horas semanales) y a las condiciones institucionales del SENA.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         FLUJOGRAMA DE PROGRESIÓN
+         ============================================ -->
+    <div class="section-title" style="margin-top:40px;">
+        <h2>🔄 Flujo de Progresión</h2>
+        <p>Cómo se articulan los 7 bootcamps en la ruta de aprendizaje</p>
+    </div>
+
+    <div class="flujograma-metodologia">
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                     │
+│   PARTICIPANTE INGRESA AL BOOTCAMP 1 (INTERROGAR)                                   │
+│                              │                                                      │
+│                              ▼                                                      │
+│   ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│   │  ¿Completó el producto verificable?                                         │   │
+│   │  • Prompt RAE + tabla benchmark + análisis multimodal                       │   │
+│   └─────────────────────────────────────────────────────────────────────────────┘   │
+│                              │                                                      │
+│                    ┌─────────┴─────────┐                                            │
+│                    ▼                   ▼                                            │
+│              ┌──────────┐        ┌──────────┐                                       │
+│              │   SÍ     │        │   NO     │                                       │
+│              │ Avanza   │        │ Revisa   │                                       │
+│              │ al       │        │ y ajusta │                                       │
+│              │ Bootcamp │        │          │                                       │
+│              │ 2        │        │          │                                       │
+│              └──────────┘        └──────────┘                                       │
+│                    │                                                                │
+│                    ▼                                                                │
+│   ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│   │  BOOTCAMP 2: CONTEXTUALIZAR                                                 │   │
+│   │  → 3 recursos + 1 experiencia completa                                      │   │
+│   └─────────────────────────────────────────────────────────────────────────────┘   │
+│                    │                                                                │
+│                    ▼                                                                │
+│   ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│   │  BOOTCAMP 3: CONTRASTAR                                                     │   │
+│   │  → Implementación documentada + reflexión                                   │   │
+│   └─────────────────────────────────────────────────────────────────────────────┘   │
+│                    │                                                                │
+│                    ▼                                                                │
+│   ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│   │  BOOTCAMP 4: VERIFICAR                                                      │   │
+│   │  → Sistema completo + artefacto HTML                                        │   │
+│   └─────────────────────────────────────────────────────────────────────────────┘   │
+│                    │                                                                │
+│                    ▼                                                                │
+│   ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│   │  BOOTCAMP 5: CURAR                                                          │   │
+│   │  → Taller dictado + automatización + mentoría                               │   │
+│   └─────────────────────────────────────────────────────────────────────────────┘   │
+│                    │                                                                │
+│                    ▼                                                                │
+│   ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│   │  BOOTCAMP 6: ARBITRAR                                                       │   │
+│   │  → Artículo + guía metodológica replicable                                  │   │
+│   └─────────────────────────────────────────────────────────────────────────────┘   │
+│                    │                                                                │
+│                    ▼                                                                │
+│   ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│   │  BOOTCAMP 7: COCREAR                                                        │   │
+│   │  → Red de mentores + publicación colaborativa                               │   │
+│   └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+    </div>
+
+    <!-- ============================================
+         TABLA RESUMEN
+         ============================================ -->
+    <div class="section-title" style="margin-top:40px;">
+        <h2>📊 Resumen de los 7 Bootcamps</h2>
+        <p>Verbo taxonómico, nivel, duración y producto verificable</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Verbo</th>
+                <th>Nivel</th>
+                <th>Duración</th>
+                <th>Producto Verificable</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1</strong></td>
+                <td>Interrogar</td>
+                <td>Explorador</td>
+                <td>2 horas</td>
+                <td>Tabla benchmark + análisis multimodal</td>
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                <td>Contextualizar</td>
+                <td>Aprendiz</td>
+                <td>12 horas</td>
+                <td>3 recursos + 1 experiencia completa</td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td>Contrastar</td>
+                <td>Practicante</td>
+                <td>30 días</td>
+                <td>Implementación documentada + reflexión</td>
+            </tr>
+            <tr>
+                <td><strong>4</strong></td>
+                <td>Verificar</td>
+                <td>Diseñador</td>
+                <td>20 horas</td>
+                <td>Sistema completo + artefacto HTML</td>
+            </tr>
+            <tr>
+                <td><strong>5</strong></td>
+                <td>Curar</td>
+                <td>Mentor</td>
+                <td>40 horas</td>
+                <td>Taller dictado + automatización + mentoría</td>
+            </tr>
+            <tr>
+                <td><strong>6</strong></td>
+                <td>Arbitrar</td>
+                <td>Experto</td>
+                <td>Continuo</td>
+                <td>Artículo + guía metodológica replicable</td>
+            </tr>
+            <tr>
+                <td><strong>7</strong></td>
+                <td>Cocrear</td>
+                <td>Líder</td>
+                <td>Continuo</td>
+                <td>Red de mentores + publicación colaborativa</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ============================================
+         CTA / CIERRE
+         ============================================ -->
+    <div class="cta">
+        <div class="cta-badge">Aprendizaje situado · Aprendizaje a la medida</div>
+        <h2>Una ruta, múltiples caminos</h2>
+        <p>
+            El curso "Construcción de Experiencias de Aprendizaje basadas en IA" no impone un ritmo único. 
+            Cada instructor avanza desde su propio punto de partida, con sus propios tiempos y sus propios intereses, 
+            pero con un destino compartido: <strong>convertirse en un referente en el uso pedagógico y crítico de la IA</strong>.
+        </p>
+    </div>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <div class="footer">
+        <p><strong>Metodología de los 7 Bootcamps</strong> · Curso: Creación de Experiencias de Aprendizaje basadas en IA</p>
+        <p>Ruta de Aprendizaje: De Cero a Experto en IA para Formadores SENA · Nueva Taxonomía del Aprendizaje con IA</p>
+        <p style="margin-top:8px;">HTML/CSS/JS Vanilla · SENA 2026</p>
+    </div>
+
+</div>
+
+</body>
+</html>
